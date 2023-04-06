@@ -29,7 +29,7 @@ export default () => {
         <Carousel autoPlay infiniteLoop>
             {images.map((element, index) => {
                 return (
-                    <div>
+                    <div key={index}>
                         <img src={element.src} />
                         <p className="legend" style={{"fontSize": "30px", "color":"yellow"}}>{element.legend}</p>
                     </div>

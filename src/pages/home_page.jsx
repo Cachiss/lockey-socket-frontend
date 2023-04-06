@@ -15,7 +15,7 @@ export const HomePage = () => {
   return (
     <>
       <AppBar onAboutClick={onAboutClick} />
-      <div className="bg-gray-100 p-5 sm:p-20 lg:p-30">
+      <div className="bg-gray-100 py-20 px-5 sm:p-20 lg:p-30">
         <section className='flex '>
           <div className='w-1/2 flex flex-col justify-center align-center'>
             <p className='text-xl'>Automatiza tu casa con cerraduras y luces <span className='text-4xl block'>Inteligentes</span></p>
