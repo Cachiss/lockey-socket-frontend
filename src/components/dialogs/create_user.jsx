@@ -11,6 +11,7 @@ const DialogCreateUser = ({ dialogAddUser, toggleDialogAddUser, onSubmit }) => {
 			return;
 		}
 		onSubmit(user);
+		setError(null);
 	}
 	
 	return (
