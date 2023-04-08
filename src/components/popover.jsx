@@ -2,18 +2,17 @@ import { useState } from "react";
 import { Popover, IconButton, Button } from "@mui/material"
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const PopoverComponent = ({id, clickEdit, deleteUser}) => {
+const PopoverComponent = ({id, clickEdit, deleteUser, setUser}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
-    const clickDelete = () => {
-        deleteUser(id);
-        setAnchorEl(null);
+    const handleOpenOptions = (e) => {
+        setAnchorEl(e.currentTarget);
+        setUser()
     }
-
     return (
         <>
-            <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}
+            <IconButton onClick={handleOpenOptions}
                 aria-describedby={id}
             >
                 <MoreVertIcon />
@@ -30,7 +29,7 @@ const PopoverComponent = ({id, clickEdit, deleteUser}) => {
             >
                 <div className="flex flex-col">
                     <button className="bg-blue-700 p-1 text-white w-30 lg:w-20" onClick={clickEdit}>Editar</button>
-                    <button className="bg-red-700 p-1 text-white w-30 lg:w-20" onClick={clickDelete}>Eliminar</button>
+                    <button className="bg-red-700 p-1 text-white w-30 lg:w-20" onClick={deleteUser}>Eliminar</button>
                 </div>
             </Popover>
 
