@@ -32,6 +32,7 @@ import ReactIcon from '../assets/react.svg';
 import PopoverComponent from '../components/popover';
 import DialogEditUser from '../components/dialogs/dialog_edit_user';
 import DialogDeleteUser from '../components/dialogs/delete_user';
+import DialogCreateUser from '../components/dialogs/create_user';
 
 //SOCKET
 const socket = io(import.meta.env.VITE_SOCKET_URL);
@@ -44,9 +45,6 @@ function FirestoreUsers() {
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [currentInfoUser, setCurrentInfoUser] = useState({});
 
-  const addUser = () => {
-    console.log("emitting");
-  };
 
   const toggleDialogAddUser = () => {
     setDialogAddUser(!dialogAddUser);
@@ -72,6 +70,10 @@ function FirestoreUsers() {
     setDeleteDialog(false);
   };
 
+  const handleAddUserDialog = (user) => {
+    socket.emit("create_user", user)
+    setDialogAddUser(false);
+  }
 
   useEffect(() => {
     //CHECK IF USER IS LOGGED
@@ -98,10 +100,6 @@ function FirestoreUsers() {
     }
   }, [])
 
-  useEffect(() => {
-    console.log("currentInfoUser", currentInfoUser);
-  }, [currentInfoUser]);
-
   if (loading) return (
     <div id='container' className='h-screen flex items-center justify-center'>
       <CircularProgress />
@@ -118,19 +116,13 @@ function FirestoreUsers() {
 
         </div>
       </div>
-      <button className='bg-blue-700 p-1 w-40 h-10 text-white rounded-md ' onClick={()=>socket.emit("test", "mensaje enviado desde el frontend")}>Subir info a test</button>
       <div className='flex justify-end'>
         <button className='bg-blue-700 text-white w-40 h-10 rounded-md' onClick={toggleDialogAddUser}>Agregar usuario</button>
       </div>
 
       {/* Dialog components */}
-      <Dialog open={dialogAddUser} onClose={toggleDialogAddUser}>
-        <div className=' mt-1 flex justify-end'>
-          <CloseIcon onClick={toggleDialogAddUser} className='cursor-pointer' />
-        </div>
-        <DialogTitle>Agregar un nuevo usuario</DialogTitle>
-      </Dialog>
 
+      <DialogCreateUser dialogAddUser={dialogAddUser} toggleDialogAddUser={toggleDialogAddUser} onSubmit={(data)=>handleAddUserDialog(data)} />
       <DialogEditUser open={editDialog} onClose={onCloseEditDialog} user={currentInfoUser} setUser={setCurrentInfoUser} onSubmit={(data)=>socket.emit("edit_user", data )}/>
       <DialogDeleteUser open={deleteDialog} setOpen={setDeleteDialog} onDelete={onDeleteDialogUser} />
 
