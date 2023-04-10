@@ -7,19 +7,20 @@ const DialogDeleteUser = ({open, setOpen,onDelete}) => {
 
     const handleDelete = () => {
         onDelete();
+        setOpen(false);
         setDeleted(true);
     };
 
     if(deleted){
         return(
-            <Dialog open={open}>
+            <Dialog open={deleted} onClose={()=>setDeleted(false)}>
                 <DialogTitle>Usuario eliminado</DialogTitle>
-                <button onClick={()=>setOpen(false)}>Cerrar</button>
+                <button onClick={()=>setDeleted(false)}>Cerrar</button>
             </Dialog>
         );
     }
   return (
-    <Dialog open={open}> 
+    <Dialog open={open} onClose={()=>setOpen(false)}> 
         <div className='flex flex-col p-3'>
             <p className='text-3xl text-center'>¿Estas seguro de eliminar este usuario?</p>
             <div className='flex justify-evenly mt-4'>
