@@ -55,7 +55,7 @@ function FirestoreUsers() {
     setEditDialog(true);
   }
 
-  const handleClickDeleteUser = (user) => {
+  const handleClickDeleteUser = () => {
     setDeleteDialog(true);
   };
 

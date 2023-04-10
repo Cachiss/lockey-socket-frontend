@@ -11,10 +11,10 @@ const DialogDeleteUser = ({open, setOpen,onDelete}) => {
     };
 
     if(deleted){
-        onDelete();
         return(
             <Dialog open={open}>
                 <DialogTitle>Usuario eliminado</DialogTitle>
+                <button onClick={()=>setOpen(false)}>Cerrar</button>
             </Dialog>
         );
     }

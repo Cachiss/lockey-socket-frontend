@@ -7,9 +7,21 @@ const PopoverComponent = ({id, clickEdit, deleteUser, setUser}) => {
     const open = Boolean(anchorEl);
 
     const handleOpenOptions = (e) => {
+        console.log("entro en el popover");
         setAnchorEl(e.currentTarget);
         setUser()
     }
+
+    const handleClickEditUser = () => {
+        setAnchorEl(null);
+        clickEdit();
+    }
+
+    const handleClickDeleteUser = () => {
+        setAnchorEl(null);
+        deleteUser();
+    }
+
     return (
         <>
             <IconButton onClick={handleOpenOptions}
@@ -28,8 +40,8 @@ const PopoverComponent = ({id, clickEdit, deleteUser, setUser}) => {
                 }}
             >
                 <div className="flex flex-col">
-                    <button className="bg-blue-700 p-1 text-white w-30 lg:w-20" onClick={clickEdit}>Editar</button>
-                    <button className="bg-red-700 p-1 text-white w-30 lg:w-20" onClick={deleteUser}>Eliminar</button>
+                    <button className="bg-blue-700 p-1 text-white w-30 lg:w-20" onClick={handleClickEditUser}>Editar</button>
+                    <button className="bg-red-700 p-1 text-white w-30 lg:w-20" onClick={handleClickDeleteUser}>Eliminar</button>
                 </div>
             </Popover>
 
